@@ -1,42 +1,55 @@
-import { useEffect, useState } from 'react';
-import React from 'react';
-import { SafeAreaView } from 'react-native';
-import { styles } from './style';
-import { CheckBox, ListItem } from 'react-native-elements';
+import React, { useEffect, useState } from 'react';
+import { SafeAreaView, ScrollView } from 'react-native';
+import { CheckBox, Button } from 'react-native-elements';
 import Menuservice from '../../services/menuService';
-import { FlatList } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
 const Menu: React.FC = () => {
   const [pizzas, setPizzas] = useState([]);
-  const order: any = [];
-
-  async function getPizzas() {
-    setPizzas(await Menuservice.getMenu());
-  }
+  const [pizzasId, setPizzasId] = useState<any[]>([]);
+  const navigation = useNavigation();
 
   useEffect(() => {
+    async function getPizzas() {
+      setPizzas(await Menuservice.getMenu());
+    }
     getPizzas();
   }, []);
 
-  function setCheck(name: any) {
-    order.push(name);
-    console.log(order);
+  async function handleAdd(id: any) {
+    const findPizzasId = pizzasId.find((value: any) => value === id);
+    findPizzasId
+      ? setPizzasId(pizzasId.filter((value) => value !== id))
+      : setPizzasId([...pizzasId, id]);
+    console.log(pizzasId);
+  }
+
+  const isSelected = (value: any) => pizzasId.includes(value);
+
+  async function getOrder() {
+    navigation.navigate('orders', { pizzas });
   }
 
   return (
     <SafeAreaView>
-      {pizzas.map((pizza: any) => (
-        <CheckBox
-          key={pizza.id}
-          title={pizza.name}
-          checked={false}
-          onPress={() => setCheck(pizza.name)}
-          iconType="material"
-          checkedIcon="run_circle"
-          uncheckedIcon="circle"
-          checkedColor="red"
-        />
-      ))}
+      <Button
+        title={`Adicionar ${pizzasId.length} ao pedido`}
+        onPress={getOrder}
+      />
+      <ScrollView>
+        {pizzas.map((pizza: any) => (
+          <CheckBox
+            key={pizza.id}
+            title={pizza.name}
+            checked={isSelected(pizza.id)}
+            onPress={() => handleAdd(pizza.id)}
+            iconType="material"
+            checkedIcon="circle"
+            uncheckedIcon="circle"
+            checkedColor="red"
+          />
+        ))}
+      </ScrollView>
     </SafeAreaView>
   );
 };

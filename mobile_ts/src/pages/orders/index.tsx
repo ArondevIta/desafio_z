@@ -1,39 +1,46 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, SafeAreaView } from 'react-native';
+import { FlatList, SafeAreaView, Text, View } from 'react-native';
 import OrderService from '../../services/orderService';
-import { ListItem } from 'react-native-elements';
+import { ListItem, Card } from 'react-native-elements';
+import { useNavigation, useRoute } from '@react-navigation/native';
+
+interface Data {
+  id: number;
+  name: string;
+  product: string;
+  status: string;
+}
 
 const Orders = () => {
-  const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState<Data[]>();
   const keyExtractor = (item: any, index: any) => index.toString();
 
   useEffect(() => {
-    async function getOrderss() {
+    async function getOrders() {
       setOrders(await OrderService.getOrders());
+      console.log(orders);
     }
-    getOrderss();
+
+    getOrders();
   }, []);
 
-  const RenderOrder = (props: any) => {
-    const { item } = props;
-
-    return (
-      <ListItem key={item.id} bottomDivider>
-        <ListItem.Content>
-          <ListItem.Title>{item.name}</ListItem.Title>
-        </ListItem.Content>
-        <ListItem.Chevron />
-      </ListItem>
-    );
+  const RenderOrders = (data: Data) => {
+    return <></>;
   };
 
   return (
     <SafeAreaView>
-      <FlatList
-        data={orders}
-        renderItem={RenderOrder}
-        keyExtractor={keyExtractor}
-      />
+      <Card>
+        <Card.Title>Meus pedidos</Card.Title>
+        {orders?.map((order) => (
+          <View key={order?.id}>
+            <Card.Divider />
+            <Text>{order?.name}</Text>
+            <Text>{order?.product}</Text>
+            <Text>{order?.status}</Text>
+          </View>
+        ))}
+      </Card>
     </SafeAreaView>
   );
 };

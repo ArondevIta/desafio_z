@@ -8,7 +8,13 @@ const Stack = createStackNavigator();
 const StackRoutes: React.FC = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Pizzaria House" component={TabRoutes} />
+      <Stack.Screen
+        name="Pizzaria House"
+        component={TabRoutes}
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack.Navigator>
   );
 };
