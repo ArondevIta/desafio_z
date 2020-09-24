@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView, Text, View } from 'react-native';
 import OrderService from '../../services/orderService';
-import { ListItem, Card } from 'react-native-elements';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { Card } from 'react-native-elements';
 
 interface Data {
   id: number;
@@ -13,7 +12,6 @@ interface Data {
 
 const Orders = () => {
   const [orders, setOrders] = useState<Data[]>();
-  const keyExtractor = (item: any, index: any) => index.toString();
 
   useEffect(() => {
     async function getOrders() {
@@ -23,10 +21,6 @@ const Orders = () => {
 
     getOrders();
   }, []);
-
-  const RenderOrders = (data: Data) => {
-    return <></>;
-  };
 
   return (
     <SafeAreaView>

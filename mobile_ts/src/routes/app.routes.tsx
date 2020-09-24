@@ -1,6 +1,5 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import Home from '../pages/home';
 import TabRoutes from './tab.routes';
 
 const Stack = createStackNavigator();

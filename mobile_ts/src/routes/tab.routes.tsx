@@ -5,6 +5,7 @@ import Orders from '../pages/orders';
 import Profile from '../pages/profile';
 import Menu from '../pages/menu';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import Car from '../pages/car';
 
 const TabStack = createBottomTabNavigator();
 
@@ -20,6 +21,8 @@ const TabRoutes: React.FC = () => {
           } else if (route.name === 'menu') {
             return <Icon name="file-alt" size={size} color={color} />;
           } else if (route.name === 'orders') {
+            return <Icon name="clipboard" size={size} color={color} />;
+          } else if (route.name === 'car') {
             return <Icon name="shopping-cart" size={size} color={color} />;
           }
         },
@@ -28,6 +31,7 @@ const TabRoutes: React.FC = () => {
       <TabStack.Screen name="menu" component={Menu} />
       <TabStack.Screen name="orders" component={Orders} />
       <TabStack.Screen name="profile" component={Profile} />
+      <TabStack.Screen name="car" component={Car} />
     </TabStack.Navigator>
   );
 };

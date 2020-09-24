@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 import { styles } from './style';
 import { Card, Input, Button, Avatar } from 'react-native-elements';
 import { SafeAreaView } from 'react-native-safe-area-context';

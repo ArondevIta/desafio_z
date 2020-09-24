@@ -16,18 +16,17 @@ const Menu: React.FC = () => {
     getPizzas();
   }, []);
 
-  async function handleAdd(id: any) {
+  async function handleAdd(id: any, name: string) {
     const findPizzasId = pizzasId.find((value: any) => value === id);
     findPizzasId
       ? setPizzasId(pizzasId.filter((value) => value !== id))
-      : setPizzasId([...pizzasId, id]);
-    console.log(pizzasId);
+      : setPizzasId([...pizzasId, [id, name]]);
   }
 
   const isSelected = (value: any) => pizzasId.includes(value);
 
   async function getOrder() {
-    navigation.navigate('orders', { pizzas });
+    navigation.navigate('car', { pizzasId });
   }
 
   return (
@@ -42,7 +41,7 @@ const Menu: React.FC = () => {
             key={pizza.id}
             title={pizza.name}
             checked={isSelected(pizza.id)}
-            onPress={() => handleAdd(pizza.id)}
+            onPress={() => handleAdd(pizza.id, pizza.name)}
             iconType="material"
             checkedIcon="circle"
             uncheckedIcon="circle"
