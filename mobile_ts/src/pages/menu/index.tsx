@@ -37,6 +37,7 @@ const Menu: React.FC = () => {
         onPress={goToCart}
         buttonStyle={{ backgroundColor: '#DC143C' }}
         containerStyle={{ padding: 15 }}
+        disabled={pizzasIds.length === 0 ? true : false}
       />
       <ScrollView>
         {pizzas.map((pizza: any) => (
