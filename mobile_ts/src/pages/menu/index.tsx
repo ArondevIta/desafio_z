@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const Menu: React.FC = () => {
   const [pizzas, setPizzas] = useState([]);
-  const [pizzasId, setPizzasId] = useState<any[]>([]);
+  const [pizzasIds, setPizzasIds] = useState<any[]>([]);
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -16,32 +16,32 @@ const Menu: React.FC = () => {
     getPizzas();
   }, []);
 
-  async function handleAdd(id: any, name: string) {
-    const findPizzasId = pizzasId.find((value: any) => value === id);
-    findPizzasId
-      ? setPizzasId(pizzasId.filter((value) => value !== id))
-      : setPizzasId([...pizzasId, [id, name]]);
+  async function handleAdd(id: any) {
+    const findPizzasIds = pizzasIds.find((value: any) => value === id);
+    findPizzasIds
+      ? setPizzasIds(pizzasIds.filter((value) => value !== id))
+      : setPizzasIds([...pizzasIds, id]);
   }
 
-  const isSelected = (value: any) => pizzasId.includes(value);
+  const isSelected = (value: any) => pizzasIds.includes(value);
 
-  async function getOrder() {
-    navigation.navigate('car', { pizzasId });
+  async function goToCart() {
+    navigation.navigate('car', { pizzasIds });
   }
 
   return (
     <SafeAreaView>
       <Button
-        title={`Adicionar ${pizzasId.length} ao pedido`}
-        onPress={getOrder}
+        title={`Adicionar ${pizzasIds.length} ao carrinho`}
+        onPress={goToCart}
       />
       <ScrollView>
         {pizzas.map((pizza: any) => (
           <CheckBox
             key={pizza.id}
-            title={pizza.name}
+            title={`${pizza.name} | R$ ${pizza.price}`}
             checked={isSelected(pizza.id)}
-            onPress={() => handleAdd(pizza.id, pizza.name)}
+            onPress={() => handleAdd(pizza.id)}
             iconType="material"
             checkedIcon="circle"
             uncheckedIcon="circle"

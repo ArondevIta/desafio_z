@@ -7,7 +7,7 @@ export default class OrderService {
     const { data } = await api.get(ORDER_BASE_URL);
     return data;
   }
-  static async getOrder(id: number) {
+  static async getById(id: number) {
     const { data } = await api.get(`${ORDER_BASE_URL}/${id}`);
     return data;
   }

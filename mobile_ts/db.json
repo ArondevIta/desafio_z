@@ -59,55 +59,68 @@
   "pizzas": [
     {
       "id": 1,
-      "name": "Pizza calabresa"
+      "name": "Pizza calabresa",
+      "price": 20
     },
     {
       "id": 2,
-      "name": "Pizza lombinho"
+      "name": "Pizza lombinho",
+      "price": 28
     },
     {
       "id": 3,
-      "name": "Pizza portuguesa"
+      "name": "Pizza portuguesa",
+      "price": 15
     },
     {
       "id": 4,
-      "name": "Pizza mista"
+      "name": "Pizza mista",
+      "price": 19
     },
     {
       "id": 5,
-      "name": "Pizza doce"
+      "name": "Pizza doce",
+      "price": 22
     },
     {
       "id": 6,
-      "name": "Pizza da casa"
+      "name": "Pizza da casa",
+      "price": 17
     },
     {
       "id": 7,
-      "name": "Pizza frango"
+      "name": "Pizza frango",
+      "price": 19
     },
     {
       "id": 8,
-      "name": "Pizza milho"
+      "name": "Pizza milho",
+      "price": 15.5
     },
     {
       "id": 9,
-      "name": "Pizza cebola"
+      "name": "Pizza cebola",
+      "price": 23
     },
     {
       "id": 10,
-      "name": "Pizza porco"
+      "name": "Pizza porco",
+      "price": 25
     },
     {
       "id": 11,
-      "name": "Pizza carne seca com banana"
+      "name": "Pizza carne seca com banana",
+      "price": 17
     },
     {
       "id": 12,
-      "name": "Pizza morango"
+      "name": "Pizza morango",
+      "price": 15
     },
     {
       "id": 13,
-      "name": "Pizza atum"
+      "name": "Pizza atum",
+      "price": 20
     }
   ]
 }

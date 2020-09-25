@@ -31,7 +31,7 @@ const TabRoutes: React.FC = () => {
       <TabStack.Screen name="menu" component={Menu} />
       <TabStack.Screen name="orders" component={Orders} />
       <TabStack.Screen name="profile" component={Profile} />
-      <TabStack.Screen name="car" component={Car} />
+      
     </TabStack.Navigator>
   );
 };

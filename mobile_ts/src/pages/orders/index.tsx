@@ -16,7 +16,6 @@ const Orders = () => {
   useEffect(() => {
     async function getOrders() {
       setOrders(await OrderService.getOrders());
-      console.log(orders);
     }
 
     getOrders();
@@ -25,7 +24,7 @@ const Orders = () => {
   return (
     <SafeAreaView>
       <Card>
-        <Card.Title>Meus pedidos</Card.Title>
+        <Card.Title>Histórico de pedidos</Card.Title>
         {orders?.map((order) => (
           <View key={order?.id}>
             <Card.Divider />
