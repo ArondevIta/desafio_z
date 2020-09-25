@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Text, View, SafeAreaView } from 'react-native';
+import { Text, View, SafeAreaView, Alert } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import { Card } from 'react-native-elements';
+import { Card, Button } from 'react-native-elements';
 import OrderService from '../../services/orderService';
+import { useNavigation } from '@react-navigation/native';
 
 interface Params {
   pizzasIds: number[];
@@ -17,17 +18,20 @@ interface IPizza {
 const Car: React.FC = () => {
   const route = useRoute();
   const { pizzasIds } = route.params as Params;
-  console.log(route);
-
   const [pizzas, setPizzas] = useState<IPizza[]>([]);
-  console.log(pizzasIds);
+
+  const navigation = useNavigation();
+
+  var total: any = pizzas.reduce(getTotal, 0);
+  function getTotal(total: any, item: any) {
+    return (total += item.price);
+  }
 
   const getPizzas = useCallback(async () => {
     const pizzasSelected: IPizza[] = [];
     if (pizzasIds.length) {
       for (const pizza of pizzasIds) {
         const t = await OrderService.getById(pizza);
-        console.log('LINHA 25', pizza);
         pizzasSelected.push(t);
       }
     }
@@ -38,19 +42,57 @@ const Car: React.FC = () => {
     getPizzas();
   }, [getPizzas]);
 
+  function handleOrder() {
+    Alert.alert('Pedido finalizado!');
+    navigation.navigate('home');
+  }
+
   return (
-    <SafeAreaView>
-      <Card>
-        <Card.Title>Pedidos</Card.Title>
-        {pizzas?.map((pizza) => (
-          <View key={pizza?.id}>
-            <Card.Divider />
-            <Text>{pizza?.name}</Text>
-            <Text>R$ {pizza?.price}</Text>
-          </View>
-        ))}
+    <>
+      <SafeAreaView>
+        <Card>
+          <Card.Title>Carrinho</Card.Title>
+          {pizzas?.map((pizza) => (
+            <View key={pizza?.id}>
+              <Card.Divider />
+              <Text>{pizza?.name}</Text>
+              <Text>R$ {pizza?.price}</Text>
+            </View>
+          ))}
+        </Card>
+      </SafeAreaView>
+
+      <Card
+        containerStyle={{
+          flex: 1,
+          position: 'absolute',
+          bottom: 10,
+          width: '95%',
+        }}>
+        <View style={{ flexDirection: 'row' }}>
+          <Text
+            style={{
+              width: '50%',
+              backgroundColor: '#ccc',
+              marginBottom: 5,
+              padding: 8,
+              fontSize: 18,
+              fontWeight: 'bold',
+            }}>
+            TOTAL= {total}
+          </Text>
+          <Button
+            buttonStyle={{ backgroundColor: '#DC143C' }}
+            containerStyle={{
+              width: '50%',
+              marginLeft: 5,
+            }}
+            title="Finalizar Pedido"
+            onPress={handleOrder}
+          />
+        </View>
       </Card>
-    </SafeAreaView>
+    </>
   );
 };
 

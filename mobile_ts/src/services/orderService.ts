@@ -8,7 +8,7 @@ export default class OrderService {
     return data;
   }
   static async getById(id: number) {
-    const { data } = await api.get(`${ORDER_BASE_URL}/${id}`);
+    const { data } = await api.get(`/pizzas/${id}`);
     return data;
   }
 }

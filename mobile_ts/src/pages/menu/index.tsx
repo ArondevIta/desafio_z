@@ -27,6 +27,7 @@ const Menu: React.FC = () => {
 
   async function goToCart() {
     navigation.navigate('car', { pizzasIds });
+    setPizzasIds([]);
   }
 
   return (
@@ -34,6 +35,8 @@ const Menu: React.FC = () => {
       <Button
         title={`Adicionar ${pizzasIds.length} ao carrinho`}
         onPress={goToCart}
+        buttonStyle={{ backgroundColor: '#DC143C' }}
+        containerStyle={{ padding: 15 }}
       />
       <ScrollView>
         {pizzas.map((pizza: any) => (
